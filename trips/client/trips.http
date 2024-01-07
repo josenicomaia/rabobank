@@ -1,0 +1,7 @@
+POST localhost:57390/trips
+Content-Type: application/json
+
+{
+    "tripId": 11,
+    "userId": 2
+}

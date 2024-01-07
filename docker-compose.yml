@@ -1,0 +1,62 @@
+services:
+
+  cars:
+    build:
+      context: ./cars/
+      dockerfile: Dockerfile
+    depends_on:
+      - messaging
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: '0.3GB'
+
+  flights:
+    build:
+      context: ./flights/
+      dockerfile: Dockerfile
+    depends_on:
+      - messaging
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: '0.3GB'
+
+  rooms:
+    build:
+      context: ./rooms/
+      dockerfile: Dockerfile
+    depends_on:
+      - messaging
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: '0.3GB'
+
+  trips:
+    build:
+      context: ./trips/
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - messaging
+    deploy:
+      resources:
+        limits:
+          cpus: '0.4'
+          memory: '0.3GB'
+
+  messaging:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '1.1GB'
